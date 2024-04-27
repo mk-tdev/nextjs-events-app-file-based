@@ -1,10 +1,25 @@
 import EventList from "@/components/events/event-list";
-import { getAllEvents } from "@/dummyData";
+import { getAllEvents } from "@/utils/api-util";
 
-const Home = () => {
-  const featuredEvents = getAllEvents();
+export const getStaticProps = async () => {
+  const allEvents = await getAllEvents();
 
-  return <EventList items={featuredEvents} />;
+  if (!allEvents) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      allEvents,
+      revalidate: 60,
+    },
+  };
+};
+
+const Home = ({ allEvents }: any) => {
+  return <div>{allEvents && <EventList items={allEvents} />}</div>;
 };
 
 export default Home;

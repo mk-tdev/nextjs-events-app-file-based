@@ -13,10 +13,9 @@ const EventItem = (props: any) => {
   const exploreLink = `/events/${id}`;
 
   return (
-    <li className=" shadow-lg p-3 cursor-pointer">
-      <img src={`/${image}`} alt="title" />
-
-      <div>
+    <li className="flex flex-col shadow-lg p-3 cursor-pointer">
+      <div className="flex-1">
+        <img src={`/${image}`} alt="title" />
         <div>
           <h2>{title}</h2>
           <div>
@@ -26,9 +25,9 @@ const EventItem = (props: any) => {
             <address>{formattedAddress}</address>
           </div>
         </div>
-        <div className="shadow-lg p-3 bg-yellow-600 text-white">
-          <Link href={exploreLink}>Explore Event</Link>
-        </div>
+      </div>
+      <div className="shadow-lg p-3 bg-yellow-600 text-white ">
+        <Link href={exploreLink}>Explore Event</Link>
       </div>
     </li>
   );

@@ -7,6 +7,11 @@ const MainHeader = () => {
         <nav>
           <ul className="flex space-x-4">
             <li>
+              <Link href="/" className="hover:text-gray-400">
+                Home
+              </Link>
+            </li>
+            <li>
               <Link href="/events" className="hover:text-gray-400">
                 Events
               </Link>
@@ -14,11 +19,6 @@ const MainHeader = () => {
             <li>
               <Link href="/search" className="hover:text-gray-400">
                 Search
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className="hover:text-gray-400">
-                Home
               </Link>
             </li>
           </ul>
