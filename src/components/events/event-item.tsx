@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const EventItem = (props: any) => {
@@ -15,7 +16,8 @@ const EventItem = (props: any) => {
   return (
     <li className="flex flex-col shadow-lg p-3 cursor-pointer">
       <div className="flex-1">
-        <img src={`/${image}`} alt="title" />
+        <Image src={`/${image}`} alt={title} width={300} height={200} />
+        {/* <img src={`/${image}`} alt="title" /> */}
         <div>
           <h2>{title}</h2>
           <div>

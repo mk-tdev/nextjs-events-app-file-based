@@ -4,6 +4,7 @@ import {
   getEventById,
   getFeaturedEvents,
 } from "@/utils/api-util";
+import Head from "next/head";
 
 export const getStaticProps = async (context: any) => {
   const eventId = context.params.eventId;
@@ -39,14 +40,28 @@ export const getStaticPaths = async () => {
 };
 
 const EventDetailsPage = ({ eventItem }: any) => {
+  const pageHeadData = (
+    <Head>
+      <title>{eventItem.title}</title>
+      <meta name="description" content={`${eventItem.description}`} />
+    </Head>
+  );
   if (!eventItem) {
-    return <div className="center">Loading...</div>;
+    return (
+      <>
+        {pageHeadData}
+        <div className="center">Loading...</div>;
+      </>
+    );
   }
 
   return (
-    <div className="grid gap-4 grid-cols-2 grid-rows-2 ">
-      <EventItem item={eventItem} />
-    </div>
+    <>
+      {pageHeadData}
+      <div className="grid gap-4 grid-cols-2 grid-rows-2 ">
+        <EventItem item={eventItem} />
+      </div>
+    </>
   );
 };
 
