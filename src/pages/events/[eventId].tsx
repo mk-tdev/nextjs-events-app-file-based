@@ -1,3 +1,4 @@
+import Comments from "@/components/comments/comments";
 import EventItem from "@/components/events/event-item";
 import {
   getAllEvents,
@@ -58,9 +59,10 @@ const EventDetailsPage = ({ eventItem }: any) => {
   return (
     <>
       {pageHeadData}
-      <div className="grid gap-4 grid-cols-2 grid-rows-2 ">
+      <div className="flex flex-col items-center justify-center gap-5">
         <EventItem item={eventItem} />
       </div>
+      <Comments eventId={eventItem.id} />
     </>
   );
 };
