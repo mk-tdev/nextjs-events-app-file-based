@@ -1,11 +1,20 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import { NotificationContext } from "../../../store/notifications-context";
 
 const EventRegister = () => {
-  const emailRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<any>("");
+
+  const notificationContext = useContext(NotificationContext);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const email = emailRef.current?.value;
+
+    notificationContext.showNotification({
+      title: "Subscribing...",
+      message: "Please wait while we process your subscription.",
+      status: "pending",
+    });
 
     fetch(`api/newsletter`, {
       method: "POST",
@@ -14,12 +23,29 @@ const EventRegister = () => {
       },
       body: JSON.stringify({ email }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((response) => {
         console.log({ response });
+        emailRef.current.value = "";
+        notificationContext.showNotification({
+          title: "Success!",
+          message: "You have been subscribed to our newsletter.",
+          status: "success",
+        });
       })
       .catch((e) => {
         console.error("Error subscribing to newsletter:", e);
+        notificationContext.showNotification({
+          title: "Error",
+          message:
+            "There was an error subscribing to the newsletter. Please try again later.",
+          status: "error",
+        });
       });
   };
 
